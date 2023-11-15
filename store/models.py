@@ -11,9 +11,39 @@ class Product(models.Model):
 
 
 
+
+
+MEMBER_BRONZE = 'Bronze'
+MEMBER_Sliver = 'Sliver'
+MEMBER_Gold = 'Gold'
+
+MEMBER_CHOICES = [
+    (MEMBER_BRONZE,'Bronze'),
+    ('Sliver','Sliver'),
+    ('Gold','Gold'),
+]
+
 class Customer(models.Model):
     frist_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=255)
     birth_date = models.DateField(null=True)
+    membership = models.CharField(max_length=100,choices=MEMBER_CHOICES,default=MEMBER_BRONZE)
+
+
+
+
+PAYMENT_STATUS_PENDING = 'Pending'
+PAYMENT_STATUS_COMPLETE = 'Complete'
+PAYMENT_STATUS_FAILED = 'Failed'
+
+PAYMENT_STATUS_CHOICES = [
+    (PAYMENT_STATUS_PENDING, 'Pending'),
+    (PAYMENT_STATUS_COMPLETE, 'Complete'),
+    (PAYMENT_STATUS_FAILED, 'Failed'),
+]
+
+class Order(models.Model):
+    placed_at = models.DateTimeField(auto_now_add=True)
+    payment_status = models.CharField(max_length=100, choices=PAYMENT_STATUS_CHOICES,default=PAYMENT_STATUS_PENDING)
