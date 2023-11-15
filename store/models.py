@@ -47,3 +47,9 @@ PAYMENT_STATUS_CHOICES = [
 class Order(models.Model):
     placed_at = models.DateTimeField(auto_now_add=True)
     payment_status = models.CharField(max_length=100, choices=PAYMENT_STATUS_CHOICES,default=PAYMENT_STATUS_PENDING)
+
+
+class Address(models.Model):
+    address = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    Customer = models.OneToOneField(Customer,on_delete=models.CASCADE,primary_key=True)
